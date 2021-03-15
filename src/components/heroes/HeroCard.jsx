@@ -13,7 +13,7 @@ const HeroCard = ({ id, superhero, alter_ego, first_appearance, characters }) =>
             <Card.Text>{alter_ego}</Card.Text>
             {alter_ego !== characters && <Card.Text>{characters}</Card.Text>}
             <Card.Text>{first_appearance}</Card.Text>
-            <Link to={`./hero/${id}`}>Mas...</Link>
+            <Link to={`./hero/${id}`}>More...</Link>
           </Card.Body>
         </div>
       </Card>

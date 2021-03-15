@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Button } from 'react-bootstrap';
+import { AuthContext } from '../../auth/authContext';
+import { types } from '../../types/types';
 
 const LoginScreen = ({ history }) => {
+  const { dispatch } = useContext(AuthContext);
+
   const handleLogin = () => {
-    history.replace('/');
+    const lastPath = localStorage.getItem('lastPath') || '/';
+    dispatch({
+      type: types.login,
+      payload: {
+        name: 'Jorge',
+      },
+    });
+
+    history.replace(lastPath);
   };
 
   return (

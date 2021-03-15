@@ -1,7 +1,24 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import { AuthContext } from '../../auth/authContext';
+import { types } from '../../types/types';
 export const CustomNavbar = () => {
+  const {
+    user: { name },
+    dispatch,
+  } = useContext(AuthContext);
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch({
+      type: types.logout,
+    });
+
+    history.replace('/login');
+  };
+
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Link className='ms-3 navbar-brand' to='/'>
@@ -22,10 +39,11 @@ export const CustomNavbar = () => {
             Search
           </NavLink>
         </Nav>
-        <Nav className='navbar-collapse collapse w-100 order-3 dual-collapse2 '>
-          <NavLink activeClassName='active' className='me-3 nav-item nav-link ms-3 ms-auto' exact to='/login'>
+        <Nav className='ms-auto'>
+          <span className='nav-item nav-link ms-3 text-info'>{name}</span>
+          <button className='me-3 nav-item nav-link ms-3 btn' onClick={handleLogout}>
             Logout
-          </NavLink>
+          </button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
